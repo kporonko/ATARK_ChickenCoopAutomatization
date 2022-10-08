@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace Backend.Core.Interfaces
 {
@@ -14,6 +9,6 @@ namespace Backend.Core.Interfaces
         public HttpStatusCode AddFeeding(FeedingDto feeding);
         public HttpStatusCode AddCoop(AddCoopDto coop);
         public HttpStatusCode DeleteCoop(DeleteCoopDto coop);
-        public HttpStatusCode UpdateCoop(double newTemperature);
+        public HttpStatusCode UpdateCoop(UpdateCoop coopUpd);
     }
 }

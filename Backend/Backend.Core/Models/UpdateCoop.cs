@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.Models
 {
-    public class AddCoopDto
+    public class UpdateCoop
     {
-        public string CoopName { get; set; }
-        public int ProfileId { get; set; }
+        public int CoopId { get; set; }
+        public double NewTemperature { get; set; }
     }
 }
