@@ -26,9 +26,10 @@ namespace Backend.Core.Services
         /// </summary>
         /// <param name="profileLogin">Entered by user profile data.</param>
         /// <returns>Dto with Id of user if data is valid or null if data was invalid.</returns>
-        public ProfileDto? Login(ProfileLogin profileLogin)
+        public ProfileDto? Login(string login, string password)
         {
-            Profile? dbProfile = _context.Profiles.FirstOrDefault(x => x.Login == profileLogin.Login);
+            Profile? dbProfile = _context.Profiles.FirstOrDefault(x => x.Login == login);
+            ProfileLogin profileLogin = new ProfileLogin { Login = login, Password = password };
             if (ProfileLoginIsValid(dbProfile, profileLogin))
                 return ConvertProfileIntoDto(dbProfile);
             return null;
