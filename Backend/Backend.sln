@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend\Backend.csproj", "{0F38869A-6E4F-4458-8DF0-78C8C88262ED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7F6DC5B-BE8C-49AC-8374-4D021C77F022} = {D7F6DC5B-BE8C-49AC-8374-4D021C77F022}
+		{DED5CA70-2AFE-4F6A-B685-2F3F79681EFA} = {DED5CA70-2AFE-4F6A-B685-2F3F79681EFA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Core", "Backend.Core\Backend.Core.csproj", "{DED5CA70-2AFE-4F6A-B685-2F3F79681EFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Infrastructure", "Backend.Infrastructure\Backend.Infrastructure.csproj", "{D7F6DC5B-BE8C-49AC-8374-4D021C77F022}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DED5CA70-2AFE-4F6A-B685-2F3F79681EFA} = {DED5CA70-2AFE-4F6A-B685-2F3F79681EFA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

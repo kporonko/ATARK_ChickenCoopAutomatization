@@ -10,11 +10,6 @@ namespace Backend.Infrastructure.Data
 {
     public class ApplicationContext : DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<Coop> Coops { get; set; }
         public DbSet<CoopFeeding> CoopFeedings { get; set; }
         public DbSet<Profile> Profiles { get; set; }
