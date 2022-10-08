@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationContext>();
 
 builder.Services.AddTransient<IProfileService, ProfileService>();
+builder.Services.AddTransient<ICoopService, CoopService>();
 
 var app = builder.Build();
 

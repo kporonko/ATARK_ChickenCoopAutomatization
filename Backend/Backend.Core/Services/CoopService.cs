@@ -169,7 +169,7 @@ namespace Backend.Core.Services
         /// <returns>Datetime of the last coop feeding.</returns>
         private DateTime GetLastFeeding(Coop coop)
         {
-            DateTime lastFeeding = coop.CoopFeedings.OrderBy(x => x.DateOfFeeding).FirstOrDefault().DateOfFeeding;
+            DateTime lastFeeding = coop.CoopFeedings.OrderByDescending(x => x.DateOfFeeding).FirstOrDefault().DateOfFeeding;
             return lastFeeding;
         }
 
