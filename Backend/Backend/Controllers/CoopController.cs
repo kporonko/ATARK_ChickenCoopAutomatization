@@ -35,6 +35,16 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(AddFeeding), result);
         }
 
+        [HttpPost]
+        [Route("AddEggCollect")]
+        public IActionResult AddEggCollect(EggCollectDto eggCollect)
+        {
+            var result = _coopService.AddEggCollect(eggCollect);
+            if (result == System.Net.HttpStatusCode.BadRequest)
+                return BadRequest();
+            return CreatedAtAction(nameof(AddEggCollect), result);
+        }
+
         [HttpDelete]
         [Route("DeleteCoop")]
         public IActionResult DeleteCoop(DeleteCoopDto deleteCoop)

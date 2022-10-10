@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Backend.Infrastructure.Models
 {
-    public class CoopFeeding
+    public class EggCollect
     {
-        public int CoopFeedingId { get; set; }
-        public DateTime DateOfFeeding { get; set; }
+        public int EggCollectId { get; set; }
+        public DateTime DateOfCollecting { get; set; }
+        public int EggsCount { get; set; }
         public int CoopId { get; set; }
         public Coop Coop { get; set; }
     }

@@ -14,5 +14,6 @@ namespace Backend.Infrastructure.Models
         public int ProfileId { get; set; }
         public Profile Profile { get; set; }
         public List<CoopFeeding> CoopFeedings { get; set; } = new List<CoopFeeding>();
+        public List<EggCollect> EggCollects { get; set; } = new List<EggCollect>();
     }
 }

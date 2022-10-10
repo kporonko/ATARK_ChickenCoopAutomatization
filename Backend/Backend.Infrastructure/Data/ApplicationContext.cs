@@ -13,6 +13,7 @@ namespace Backend.Infrastructure.Data
         public DbSet<Coop> Coops { get; set; }
         public DbSet<CoopFeeding> CoopFeedings { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<EggCollect> EggCollects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,6 +25,7 @@ namespace Backend.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ProfileConfiguration());
             modelBuilder.ApplyConfiguration(new CoopConfiguration());
             modelBuilder.ApplyConfiguration(new CoopFeedingConfiguration());
+            modelBuilder.ApplyConfiguration(new EggCollectConfiguration());
 
             modelBuilder
                 .Entity<Coop>()
@@ -35,6 +37,12 @@ namespace Backend.Infrastructure.Data
                 .Entity<CoopFeeding>()
                 .HasOne(x => x.Coop)
                 .WithMany(x => x.CoopFeedings)
+                .HasForeignKey(x => x.CoopId)
+                .IsRequired();
+            modelBuilder
+                .Entity<EggCollect>()
+                .HasOne(x => x.Coop)
+                .WithMany(x => x.EggCollects)
                 .HasForeignKey(x => x.CoopId)
                 .IsRequired();
         }

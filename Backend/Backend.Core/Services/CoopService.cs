@@ -82,7 +82,7 @@ namespace Backend.Core.Services
         /// <returns>Null if coop doesnt exists. Otherwise, returns coop with feeding dto.</returns>
         public CoopWithFeedingDto? GetCoopById(int coopId)
         {
-            Coop? coop = _context.Coops.Include(x => x.CoopFeedings).FirstOrDefault(x => x.CoopId == coopId);
+            Coop? coop = _context.Coops.Include(x => x.CoopFeedings).Include(x => x.EggCollects).FirstOrDefault(x => x.CoopId == coopId);
             if(coop == null)
                 return null;
             CoopWithFeedingDto res = ConvertCoopToCoopWithFeedingDto(coop);
@@ -101,6 +101,22 @@ namespace Backend.Core.Services
                 return HttpStatusCode.BadRequest;
             UpdateCoopContext(coop, coopUpd.NewTemperature);
             return HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Checks coop. If coop doesnt exist returns 400 sc.
+        /// Otherwise creates eggcollect object from dto and adds to db.
+        /// </summary>
+        /// <param name="eggCollect">Coop id, date of collecting and eggs count in dto.</param>
+        /// <returns>201 if eggcollect was added to db. Otherwise 400.</returns>
+        public HttpStatusCode AddEggCollect(EggCollectDto eggCollect)
+        {
+            Coop? coop = _context.Coops.Include(x => x.EggCollects).FirstOrDefault(x => x.CoopId == eggCollect.CoopId);
+            if (coop == null)
+                return HttpStatusCode.BadRequest;
+            EggCollect collect = new EggCollect { Coop = coop, CoopId = coop.CoopId, DateOfCollecting = eggCollect.CollectDate, EggsCount = eggCollect.EggsCount };
+            AddToDbEggCollectObject(collect);
+            return HttpStatusCode.Created;
         }
 
         /// <summary>
@@ -157,8 +173,9 @@ namespace Backend.Core.Services
         private CoopWithFeedingDto ConvertCoopToCoopWithFeedingDto(Coop coop)
         {
             CoopWithFeedingDto resCoopInfo = new CoopWithFeedingDto { Name = coop.CoopName, TemperatureCelsius = coop.TemperatureCelsius };
-            resCoopInfo.LastFeeding = GetLastFeeding(coop);
+            resCoopInfo.EggCollects = GetEggCollects(coop);
             resCoopInfo.AllFeedingsHistory = GetAllFeedingsHistory(coop);
+            resCoopInfo.EggsByWeek = CountEggsThisWeek(resCoopInfo.EggCollects);
             return resCoopInfo;
         }
 
@@ -167,10 +184,10 @@ namespace Backend.Core.Services
         /// </summary>
         /// <param name="coop">Coop which last feeding we want to get.</param>
         /// <returns>Datetime of the last coop feeding.</returns>
-        private DateTime GetLastFeeding(Coop coop)
+        private Dictionary<DateTime, int> GetEggCollects(Coop coop)
         {
-            DateTime lastFeeding = coop.CoopFeedings.OrderByDescending(x => x.DateOfFeeding).FirstOrDefault().DateOfFeeding;
-            return lastFeeding;
+            Dictionary<DateTime, int> collects = coop.EggCollects.OrderByDescending(x => x.DateOfCollecting).ToDictionary(x => x.DateOfCollecting, x => x.EggsCount);
+            return collects;
         }
 
         /// <summary>
@@ -193,6 +210,32 @@ namespace Backend.Core.Services
         {
             coop.TemperatureCelsius = newTemperature;
             _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adds and saves egg collect object to db.
+        /// </summary>
+        /// <param name="eggCollect">Egg collect to add.</param>
+        private void AddToDbEggCollectObject(EggCollect eggCollect)
+        {
+            _context.EggCollects.Add(eggCollect);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Counts eggs for last 7 days by date and eggscount values pair.
+        /// </summary>
+        /// <param name="eggsCollects"></param>
+        /// <returns></returns>
+        private int CountEggsThisWeek(Dictionary<DateTime, int> eggsCollects)
+        {
+            int count = 0;
+            foreach (var item in eggsCollects)
+            {
+                if ((DateTime.Now - item.Key).Days < 7)
+                    count += item.Value; 
+            }
+            return count;
         }
     }
 }

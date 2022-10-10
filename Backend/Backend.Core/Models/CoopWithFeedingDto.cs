@@ -10,7 +10,8 @@ namespace Backend.Core.Models
     {
         public string Name { get; set; }
         public double TemperatureCelsius { get; set; }
-        public DateTime LastFeeding { get; set; }
+        public Dictionary<DateTime, int> EggCollects { get; set; }
+        public int EggsByWeek { get; set; }
         public List<DateTime> AllFeedingsHistory { get; set; } 
     }
 }
