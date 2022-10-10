@@ -123,7 +123,7 @@ namespace Backend.Core.Services
         /// <returns>Profile model object.</returns>
         private Profile ConvertRegisterProfileToProfile(ProfileRegister profileRegister)
         {
-            Profile profile = new Profile { FirstName = profileRegister.FirstName, LastName = profileRegister.LastName, Login = profileRegister.Login };
+            Profile profile = new Profile { FirstName = profileRegister.FirstName, LastName = profileRegister.LastName, Login = profileRegister.Login, TimeOfFirstFeeding = profileRegister.TimeOfFirstFeeding, TimeOfSecondFeeding = profileRegister.TimeOfSecondFeeding };
             profile.PasswordHash = ConvertPasswordToHash(profileRegister.Password);
             return profile;
         }

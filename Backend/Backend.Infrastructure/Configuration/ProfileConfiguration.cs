@@ -38,6 +38,16 @@ namespace Backend.Infrastructure.Configuration
                 .IsRequired()
                 .HasColumnName("PasswordHash")
                 .HasColumnType("varchar(max)");
+            builder
+                .Property(x => x.TimeOfFirstFeeding)
+                .IsRequired()
+                .HasColumnName("TimeOfFirstFeeding")
+                .HasColumnType("varchar(5)");
+            builder
+                .Property(x => x.TimeOfSecondFeeding)
+                .IsRequired()
+                .HasColumnName("TimeOfSecondFeeding")
+                .HasColumnType("varchar(5)");
         }
     }
 }

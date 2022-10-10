@@ -18,6 +18,8 @@ namespace Backend.Infrastructure.Models
         
         [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
+        public string TimeOfFirstFeeding { get; set; }
+        public string TimeOfSecondFeeding { get; set; }
         public List<Coop> Coops { get; set; } = new List<Coop>();
     }
 }
