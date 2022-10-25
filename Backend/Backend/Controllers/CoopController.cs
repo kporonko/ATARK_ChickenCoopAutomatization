@@ -16,7 +16,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("AddCoop")]
+        [Route("Coop")]
         public IActionResult AddCoop(AddCoopDto coop)
         {
             var result = _coopService.AddCoop(coop);
@@ -26,7 +26,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("AddFeeding")]
+        [Route("Feeding")]
         public IActionResult AddFeeding(FeedingDto feeding)
         {
             var result = _coopService.AddFeeding(feeding);
@@ -36,7 +36,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("AddEggCollect")]
+        [Route("EggCollect")]
         public IActionResult AddEggCollect(EggCollectDto eggCollect)
         {
             var result = _coopService.AddEggCollect(eggCollect);
@@ -46,7 +46,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteCoop")]
+        [Route("Coop")]
         public IActionResult DeleteCoop(DeleteCoopDto deleteCoop)
         {
             var result = _coopService.DeleteCoop(deleteCoop);
@@ -56,7 +56,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllProfileCoops")]
+        [Route("AllProfileCoops")]
         public ActionResult<List<CoopDto>> GetAllProfileCoops(int profileId)
         {
             var result = _coopService.GetAllProfileCoops(profileId);
@@ -64,7 +64,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetCoopById")]
+        [Route("CoopById")]
         public ActionResult<List<CoopDto>> GetCoopById(int coopId)
         {
             var result = _coopService.GetCoopById(coopId);
@@ -74,7 +74,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateCoop")]
+        [Route("Coop")]
         public IActionResult UpdateCoop(UpdateCoop updateCoop)
         {
             var result = _coopService.UpdateCoop(updateCoop);
