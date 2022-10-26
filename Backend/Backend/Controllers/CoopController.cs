@@ -65,9 +65,9 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("coop/{id}")]
-        public ActionResult<List<CoopDto>> GetCoopById([FromRoute] int coopId)
+        public ActionResult<List<CoopDto>> GetCoopById([FromRoute] int id)
         {
-            var result = _coopService.GetCoopById(coopId);
+            var result = _coopService.GetCoopById(id);
             if (result is null)
                 return BadRequest();
             return Ok(result);
