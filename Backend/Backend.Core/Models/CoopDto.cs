@@ -9,6 +9,6 @@ namespace Backend.Core.Models
     public class CoopDto
     {
         public string Name { get; set; }
-        public double TemperatureCelsius { get; set; }
+        public double? TemperatureCelsius { get; set; }
     }
 }

@@ -27,7 +27,11 @@ namespace Backend.Core.Services
             var profile = _context.Profiles.Include(x => x.Coops).FirstOrDefault(x => x.ProfileId == coop.ProfileId);
             if (profile == null)
                 return HttpStatusCode.BadRequest;
+       
             Coop addCoop = new Coop { CoopName = coop.CoopName, Profile = profile, ProfileId = profile.ProfileId };
+            if (coop.IpThermometer != null)
+                addCoop.Thermometer = new Thermometer { IP = coop.IpThermometer };
+
             AddToDbCoopObject(addCoop);
             return HttpStatusCode.Created;
         }
@@ -69,7 +73,7 @@ namespace Backend.Core.Services
         /// <returns>List of coop dto by profile.</returns>
         public List<CoopDto> GetAllProfileCoops(int profileId)
         {
-            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Where(x => x.ProfileId == profileId).ToList();
+            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Include(x => x.Thermometer).Where(x => x.ProfileId == profileId).ToList();
             List<CoopDto> resList = ConvertProfileCoopsToCoopsDtoList(profileCoops);
             return resList;
         }
@@ -82,25 +86,11 @@ namespace Backend.Core.Services
         /// <returns>Null if coop doesnt exists. Otherwise, returns coop with feeding dto.</returns>
         public CoopWithFeedingDto? GetCoopById(int coopId)
         {
-            Coop? coop = _context.Coops.Include(x => x.CoopFeedings).Include(x => x.EggCollects).FirstOrDefault(x => x.CoopId == coopId);
+            Coop? coop = _context.Coops.Include(x => x.CoopFeedings).Include(x => x.Thermometer).Include(x => x.EggCollects).FirstOrDefault(x => x.CoopId == coopId);
             if(coop == null)
                 return null;
             CoopWithFeedingDto res = ConvertCoopToCoopWithFeedingDto(coop);
             return res;
-        }
-
-        /// <summary>
-        /// Tries to find coop by entered id. Id it doesnt exist returns 400 sc. Otherwise updates coop temperature in db.
-        /// </summary>
-        /// <param name="coopUpd">Coop id and new temperature in dto object.</param>
-        /// <returns>400 if cant find coop. Otherwise, 200, if updates coop temperature.</returns>
-        public HttpStatusCode UpdateCoop(UpdateCoop coopUpd)
-        {
-            var coop = _context.Coops.FirstOrDefault(x => x.CoopId == coopUpd.CoopId);
-            if (coop == null)
-                return HttpStatusCode.BadRequest;
-            UpdateCoopContext(coop, coopUpd.NewTemperature);
-            return HttpStatusCode.OK;
         }
 
         /// <summary>
@@ -117,6 +107,31 @@ namespace Backend.Core.Services
             EggCollect collect = new EggCollect { Coop = coop, CoopId = coop.CoopId, DateOfCollecting = eggCollect.CollectDate, EggsCount = eggCollect.EggsCount };
             AddToDbEggCollectObject(collect);
             return HttpStatusCode.Created;
+        }
+
+        /// <summary>
+        /// Tries to find coop by entered id. Id it doesnt exist returns 400 sc. Otherwise updates coop temperature in db.
+        /// </summary>
+        /// <param name="coopUpd">Coop id and new temperature in dto object.</param>
+        /// <returns>400 if cant find coop. Otherwise, 200, if updates coop temperature.</returns>
+        public HttpStatusCode UpdateCoop(UpdateCoop coopUpd)
+        {
+            var coop = _context.Coops.Include(x => x.Thermometer).FirstOrDefault(x => x.CoopId == coopUpd.CoopId);
+            if (coop == null)
+                return HttpStatusCode.BadRequest;
+            UpdateCoopContext(coop, coopUpd.NewTemperature);
+            return HttpStatusCode.OK;
+        }
+
+        /// <summary>
+        /// Updates coop temperature field in db.
+        /// </summary>
+        /// <param name="coop">Coop to update.</param>
+        /// <param name="newTemperature">New temperature in coop.</param>
+        private void UpdateCoopContext(Coop coop, double newTemperature)
+        {
+            coop.Thermometer.TemperatureCelsius = newTemperature;
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -159,7 +174,7 @@ namespace Backend.Core.Services
             List<CoopDto> resList = new List<CoopDto>();
             foreach (Coop coop in coops)
             {
-                CoopDto coopDto = new CoopDto { Name = coop.CoopName, TemperatureCelsius = coop.TemperatureCelsius };
+                CoopDto coopDto = new CoopDto { Name = coop.CoopName, TemperatureCelsius = coop.Thermometer.TemperatureCelsius };
                 resList.Add(coopDto);
             }
             return resList;
@@ -172,7 +187,7 @@ namespace Backend.Core.Services
         /// <returns>Dto with coop info and info about feedings.</returns>
         private CoopWithFeedingDto ConvertCoopToCoopWithFeedingDto(Coop coop)
         {
-            CoopWithFeedingDto resCoopInfo = new CoopWithFeedingDto { Name = coop.CoopName, TemperatureCelsius = coop.TemperatureCelsius };
+            CoopWithFeedingDto resCoopInfo = new CoopWithFeedingDto { Name = coop.CoopName, TemperatureCelsius = coop.Thermometer.TemperatureCelsius };
             resCoopInfo.EggCollects = GetEggCollects(coop);
             resCoopInfo.AllFeedingsHistory = GetAllFeedingsHistory(coop);
             resCoopInfo.EggsByWeek = CountEggsThisWeek(resCoopInfo.EggCollects);
@@ -199,17 +214,6 @@ namespace Backend.Core.Services
         {
             List<DateTime> allFeedings = coop.CoopFeedings.OrderByDescending(x => x.DateOfFeeding).Select(x => x.DateOfFeeding).ToList();
             return allFeedings;
-        }
-
-        /// <summary>
-        /// Updates coop temperature field in db.
-        /// </summary>
-        /// <param name="coop">Coop to update.</param>
-        /// <param name="newTemperature">New temperature in coop.</param>
-        private void UpdateCoopContext(Coop coop, double newTemperature)
-        {
-            coop.TemperatureCelsius = newTemperature;
-            _context.SaveChanges();
         }
 
         /// <summary>

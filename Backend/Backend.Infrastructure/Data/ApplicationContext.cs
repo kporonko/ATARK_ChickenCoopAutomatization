@@ -14,6 +14,7 @@ namespace Backend.Infrastructure.Data
         public DbSet<CoopFeeding> CoopFeedings { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EggCollect> EggCollects { get; set; }
+        public DbSet<Thermometer> Thermometers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +27,7 @@ namespace Backend.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new CoopConfiguration());
             modelBuilder.ApplyConfiguration(new CoopFeedingConfiguration());
             modelBuilder.ApplyConfiguration(new EggCollectConfiguration());
+            modelBuilder.ApplyConfiguration(new ThermometerConfiguration());
 
             modelBuilder
                 .Entity<Coop>()
@@ -45,6 +47,12 @@ namespace Backend.Infrastructure.Data
                 .WithMany(x => x.EggCollects)
                 .HasForeignKey(x => x.CoopId)
                 .IsRequired();
+            modelBuilder
+                .Entity<Thermometer>()
+                .HasOne(x => x.Coop)
+                .WithOne(x => x.Thermometer)
+                .HasForeignKey<Coop>(x => x.ThermometerId);
+
         }
     }
 }

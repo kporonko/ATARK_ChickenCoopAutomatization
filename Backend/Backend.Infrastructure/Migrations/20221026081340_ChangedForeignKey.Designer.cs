@@ -4,6 +4,7 @@ using Backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221026081340_ChangedForeignKey")]
+    partial class ChangedForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,10 @@ namespace Backend.Infrastructure.Migrations
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ThermometerId")
+                    b.Property<double>("TemperatureCelsius")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ThermometerId")
                         .HasColumnType("int");
 
                     b.HasKey("CoopId");
@@ -48,8 +53,7 @@ namespace Backend.Infrastructure.Migrations
                     b.HasIndex("ProfileId");
 
                     b.HasIndex("ThermometerId")
-                        .IsUnique()
-                        .HasFilter("[ThermometerId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Coop", (string)null);
                 });
@@ -184,7 +188,9 @@ namespace Backend.Infrastructure.Migrations
 
                     b.HasOne("Backend.Infrastructure.Models.Thermometer", "Thermometer")
                         .WithOne("Coop")
-                        .HasForeignKey("Backend.Infrastructure.Models.Coop", "ThermometerId");
+                        .HasForeignKey("Backend.Infrastructure.Models.Coop", "ThermometerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Profile");
 

@@ -4,6 +4,7 @@ using Backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221026080950_AddedSeparateTableForThermometer")]
+    partial class AddedSeparateTableForThermometer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,16 +42,12 @@ namespace Backend.Infrastructure.Migrations
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ThermometerId")
-                        .HasColumnType("int");
+                    b.Property<double>("TemperatureCelsius")
+                        .HasColumnType("float");
 
                     b.HasKey("CoopId");
 
                     b.HasIndex("ProfileId");
-
-                    b.HasIndex("ThermometerId")
-                        .IsUnique()
-                        .HasFilter("[ThermometerId] IS NOT NULL");
 
                     b.ToTable("Coop", (string)null);
                 });
@@ -160,6 +158,9 @@ namespace Backend.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ThermometerId"), 1L, 1);
 
+                    b.Property<int>("CoopId")
+                        .HasColumnType("int");
+
                     b.Property<string>("IP")
                         .IsRequired()
                         .HasColumnType("varchar(max)")
@@ -170,6 +171,9 @@ namespace Backend.Infrastructure.Migrations
                         .HasColumnName("TemperatureCelsius");
 
                     b.HasKey("ThermometerId");
+
+                    b.HasIndex("CoopId")
+                        .IsUnique();
 
                     b.ToTable("Thermometer", (string)null);
                 });
@@ -182,13 +186,7 @@ namespace Backend.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Infrastructure.Models.Thermometer", "Thermometer")
-                        .WithOne("Coop")
-                        .HasForeignKey("Backend.Infrastructure.Models.Coop", "ThermometerId");
-
                     b.Navigation("Profile");
-
-                    b.Navigation("Thermometer");
                 });
 
             modelBuilder.Entity("Backend.Infrastructure.Models.CoopFeeding", b =>
@@ -213,22 +211,30 @@ namespace Backend.Infrastructure.Migrations
                     b.Navigation("Coop");
                 });
 
+            modelBuilder.Entity("Backend.Infrastructure.Models.Thermometer", b =>
+                {
+                    b.HasOne("Backend.Infrastructure.Models.Coop", "Coop")
+                        .WithOne("Thermometer")
+                        .HasForeignKey("Backend.Infrastructure.Models.Thermometer", "CoopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coop");
+                });
+
             modelBuilder.Entity("Backend.Infrastructure.Models.Coop", b =>
                 {
                     b.Navigation("CoopFeedings");
 
                     b.Navigation("EggCollects");
+
+                    b.Navigation("Thermometer")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Backend.Infrastructure.Models.Profile", b =>
                 {
                     b.Navigation("Coops");
-                });
-
-            modelBuilder.Entity("Backend.Infrastructure.Models.Thermometer", b =>
-                {
-                    b.Navigation("Coop")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

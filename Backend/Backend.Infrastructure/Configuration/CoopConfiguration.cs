@@ -21,10 +21,6 @@ namespace Backend.Infrastructure.Configuration
                 .HasColumnName("CoopName")
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
-            builder
-                .Property(x => x.TemperatureCelsius)
-                .HasColumnName("TemperatureCelsius")
-                .HasColumnType("float");
         }
     }
 }
