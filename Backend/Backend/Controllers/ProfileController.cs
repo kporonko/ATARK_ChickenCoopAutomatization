@@ -16,7 +16,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("Login")]
+        [Route("login")]
         public ActionResult<ProfileDto> LoginUser(string login, string password)
         {
             var profile = _profileService.Login(login, password);
@@ -26,7 +26,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("Register")]
+        [Route("register")]
         public IActionResult RegisterNewUser(ProfileRegister profileRegister)
         {
             var response = _profileService.RegisterProfile(profileRegister);
