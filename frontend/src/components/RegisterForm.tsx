@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {register} from "../fetch/fetchData";
+import {IRegisterUser} from "../interfaces/IRegisterUser";
 
 const LoginForm = () => {
     const [login, setLogin] = useState("");
@@ -8,9 +10,24 @@ const LoginForm = () => {
     const [firstName, setFirstName] = useState("");
     const [firstFeedingTime, setFirstFeedingTime] = useState('init');
     const [secondFeedingTime, setSecondFeedingTime] = useState('init');
+
+    const nav = useNavigate()
+
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const isCreated = await register({login: login, password: password, firstName: firstName, lastName: lastName, timeOfFirstFeeding: firstFeedingTime, timeOfSecondFeeding: secondFeedingTime} as IRegisterUser)
+        if(isCreated === 201){
+            alert("Account created")
+            nav('/login')
+        }
+        else if(isCreated === 409){
+            alert("This email is already taken")
+        }
+        else{
+            alert("Oops... Something went wrong")
+        }
     }
+
     return (
         <div style={{width: "-webkit-fill-available", margin: "20px 40px"}}>
             <form onSubmit={(e)=> submit(e)}>

@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {login as loginUser} from "../fetch/fetchData";
+import {IRegisterUser} from "../interfaces/IRegisterUser";
+import {ILoginUser} from "../interfaces/ILoginUser";
 
 const LoginForm = () => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
+    const nav = useNavigate()
+
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const isLogin = await loginUser({login: login, password: password} as ILoginUser)
+        if(isLogin){
+            nav('/my-coops')
+        }
+        else{
+            alert("Incorrect password or email")
+        }
     }
     return (
         <div style={{width: "-webkit-fill-available", margin: "150px 40px"}}>
