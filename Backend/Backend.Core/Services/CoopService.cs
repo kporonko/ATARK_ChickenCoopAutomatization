@@ -73,7 +73,7 @@ namespace Backend.Core.Services
         /// <returns>List of coop dto by profile.</returns>
         public List<CoopDto> GetAllProfileCoops(int profileId)
         {
-            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Include(x => x.Thermometer).Where(x => x.ProfileId == profileId).ToList();
+            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Include(x => x.EggCollects).Where(x => x.ProfileId == profileId).ToList();
             List<CoopDto> resList = ConvertProfileCoopsToCoopsDtoList(profileCoops);
             return resList;
         }
@@ -174,7 +174,7 @@ namespace Backend.Core.Services
             List<CoopDto> resList = new List<CoopDto>();
             foreach (Coop coop in coops)
             {
-                CoopDto coopDto = new CoopDto { Name = coop.CoopName, TemperatureCelsius = coop.Thermometer.TemperatureCelsius };
+                CoopDto coopDto = new CoopDto { Name = coop.CoopName, EggsByWeek = CountEggsThisWeek(GetEggCollects(coop)) };
                 resList.Add(coopDto);
             }
             return resList;
