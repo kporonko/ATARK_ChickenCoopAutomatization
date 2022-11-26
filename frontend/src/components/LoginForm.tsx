@@ -14,11 +14,11 @@ const LoginForm = () => {
                 <h1 className="login-form-h1">Sign In To Your Account</h1>
                 <div className="login-form-inputwrapper">
                     <label className='login-form-label' htmlFor="Login">Login</label>
-                    <input className='login-form-input' type="text" placeholder="Enter login..." id="Login" value={login} onChange={(e)=>{setLogin(e.target.value)}}/>
+                    <input required className='login-form-input' type="email" placeholder="Enter login..." id="Login" value={login} onChange={(e)=>{setLogin(e.target.value)}}/>
                 </div>
                 <div className="login-form-inputwrapper">
                     <label className='login-form-label' htmlFor="Password">Password</label>
-                    <input className='login-form-input' type="password" placeholder="Enter password..." id="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+                    <input required className='login-form-input' type="password" placeholder="Enter password..." id="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
                 </div>
                 <button className="login-form-smallBtn">
                     <Link className="login-form-textDecNone" to={"/register"}>I don`t have an account</Link>
