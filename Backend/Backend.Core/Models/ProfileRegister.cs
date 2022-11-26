@@ -9,6 +9,7 @@ namespace Backend.Core.Models
 {
     public class ProfileRegister
     {
+        [DataType(DataType.EmailAddress)]
         public string Login { get; set; }
         [StringLength(100, MinimumLength = 8)]
         [DataType(DataType.Password)]
