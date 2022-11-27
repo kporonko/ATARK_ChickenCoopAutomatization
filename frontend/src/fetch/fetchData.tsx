@@ -1,5 +1,6 @@
 import {ILoginUser} from "../interfaces/ILoginUser";
 import {IRegisterUser} from "../interfaces/IRegisterUser";
+import {ICoopAdd} from "../interfaces/ICoopAdd";
 
 export const BASE_URL = 'https://localhost:7290/';
 
@@ -37,3 +38,22 @@ export const register = async (user: IRegisterUser) => {
 
     return response.status;
 }
+
+export const addCoop = async (coop: ICoopAdd) => {
+    console.log(coop)
+    const response = await fetch(`${BASE_URL}Coop/coop`, {
+        method: 'POST',
+        body: JSON.stringify({
+            "coopName": coop.coopName,
+            "profileId": coop.profileId,
+            "ipThermometer": coop.ipThermometer,
+
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true"
+        }});
+    return response.status;
+}
+

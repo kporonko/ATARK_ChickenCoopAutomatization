@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import LocalizedStrings from "react-localization";
 import HeaderSection from "./HeaderSection";
 import AddCoopButton from "./AddCoopButton";
+import {addCoop} from "../fetch/fetchData";
+import {ICoopAdd} from "../interfaces/ICoopAdd";
 
 const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -21,6 +23,8 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
             enterId: "Введите ID канала Thing Speak...",
         }
     });
+
+
 
     const [name, setName] = useState('');
     const [id, setId] = useState(0);
@@ -72,7 +76,7 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
                     </div>
 
                     <div style={{margin: '40px 0'}}>
-                        <AddCoopButton setIsActive={() => {}} isSubmit={true}/>
+                        <AddCoopButton name={name} id={id} setIsActive={() => {}} isSubmit={true}/>
                     </div>
                 </form>
             </div>
