@@ -14,9 +14,10 @@ const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<Re
         }
     });
 
-    const chooseMethod = () => {
-        if (props.isSubmit === true)
-            return;
+    const chooseMethod = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (props.isSubmit === true) {
+            e.preventDefault();
+        }
         else{
             props.setIsActive(true)
         }
@@ -27,7 +28,7 @@ const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<Re
             <button
                 type={props.isSubmit ? 'submit' : 'button'}
                 className='button-add-coop'
-                onClick={() => chooseMethod()}
+                onClick={(e) => chooseMethod(e)}
             >
                 <img className='button-add-icon' src={require('../assets/plus_icon.png')} alt=""/>
                 <h2>{strings.add}</h2>
