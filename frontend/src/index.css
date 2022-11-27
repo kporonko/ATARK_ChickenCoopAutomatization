@@ -95,6 +95,10 @@ code {
   text-decoration: none;
   color: black;
 }
+.login-form-textDecNone:hover{
+  color: red;
+  transition: all 0.7s ease;
+}
 .login-btn-disabled{
   background: lightgrey;
   margin-top: 30px;
