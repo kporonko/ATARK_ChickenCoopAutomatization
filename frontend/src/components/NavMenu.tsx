@@ -17,9 +17,9 @@ const NavMenu = (props: {indexActive: number}) => {
 
     return (
         <div className="nav-wrapper">
-            <div className='icon'>
+            <Link to={'/my-coops'} className='icon'>
                 <img className='nav-icon' src={require('../assets/chicken-coop-icon.png')} alt=""/>
-            </div>
+            </Link>
 
             <div style={{display:'flex', gap: '150px'}}>
                 <div className='nav-element'>
