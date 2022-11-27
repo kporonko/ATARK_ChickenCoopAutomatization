@@ -7,11 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media only screen and (max-width: 1200px){
+  .login-image{
+    display: none;
+  }
+  .main-header-login{
+    display: none;
+  }
+  .text-header-login{
+    display: none;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+/* Login */
 .login-image{
   width: 1100px;
   max-height: 100%;
@@ -110,8 +123,66 @@ code {
   margin: 0;
 }
 
+/* Register */
 .register-form-flex-inputs{
   display: grid;
   grid-template-columns: 40% 40%;
   grid-gap: 20%;
+}
+
+/* Nav menu */
+
+.nav-wrapper{
+  display: flex;
+  margin: 5px 0px;
+  justify-content: space-around;
+}
+.nav-icon{
+  width: 70px;
+}
+.nav-link-icon{
+  width: 70px;
+}
+.nav-link-icon-2{
+  width: 70px;
+}
+.nav-link{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  gap: 15px;
+}
+
+.nav-link:hover{
+  transform: scale(1.05);
+  transition: all 0.7s ease;
+}
+
+.nav-link-text{
+  color: black;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  font-size: 34px;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.active-page{
+  text-decoration: underline;
+}
+
+/* Header section */
+
+.header-section-wrapper{
+  background-color: black;
+  border-radius: 10px;
+  padding: 5px 0;
+}
+.header-section-text{
+  text-align: center;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  margin: 0;
 }
