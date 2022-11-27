@@ -7,15 +7,19 @@ const HeaderSection = (props: {text: string}) => {
     let strings = new LocalizedStrings({
         en:{
             myCoops:"My Coops",
+            add: "Add New Coop"
         },
         ru: {
             myCoops:"Мои Курятники",
+            add: "Добавить новый курятник"
         }
     });
 
     const localize = (text: string) => {
         if (text === 'My Coops')
             return strings.myCoops;
+        if (text === 'Add New Coop')
+            return strings.add;
     }
 
     return (
