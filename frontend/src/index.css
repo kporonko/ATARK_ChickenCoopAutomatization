@@ -190,3 +190,33 @@ code {
   font-size: 44px;
   margin: 0;
 }
+
+
+/* Add coop button */
+.button-add-coop-wrapper{
+  margin: 20px 0;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.button-add-coop{
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #43FF00;
+  border-radius: 30px;
+  padding: 0px 20px;
+}
+.button-add-coop:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.7s ease;
+}
+
+.button-add-icon{
+  width: 50px;
+}

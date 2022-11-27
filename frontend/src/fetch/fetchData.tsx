@@ -10,14 +10,15 @@ export const login = async (user: ILoginUser) => {
             'Content-Type': 'application/json'
         }});
 
+    const body = await response.json();
     if (response.status === 200) {
+        localStorage.setItem("id", body.profileId)
         return true;
     }
     return false;
 }
 
 export const register = async (user: IRegisterUser) => {
-    console.log("START FETCH")
     const response = await fetch(`${BASE_URL}Profile/register`, {
         method: 'POST',
         body: JSON.stringify({
