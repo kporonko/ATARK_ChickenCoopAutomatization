@@ -12,13 +12,12 @@ import EggCollects from "../components/EggCollects";
 const CoopDescriptionPage = () => {
 
     const {id} = useParams()
-    const [coop, setCoop] = useState<ICoop>()
+    const [coop, setCoop] = useState<ICoop>({allFeedingsHistory: [], eggsByWeek: 0, name: "", eggCollects: {string:-1}})
 
     useEffect(() => {
         const getCoopData = async () => {
             if (id !== undefined){
                 const data = await getCoop(+id);
-                console.log(data);
                 setCoop(data);
             }
         }
@@ -32,7 +31,7 @@ const CoopDescriptionPage = () => {
             <HeaderSection text={`Information `}/>
 
             <Feedings feedings={coop?.allFeedingsHistory}/>
-            <EggCollects/>
+            <EggCollects collects={coop?.eggCollects}/>
         </div>
     );
 };

@@ -434,7 +434,7 @@ code {
   margin: auto auto 20px;
 }
 
-/* Coop feedings section */
+/* Coop feedings and egg-collects sections */
 .coop-profile-feedings-wrapper{
   margin: 2% 20%;
 }
@@ -463,6 +463,18 @@ code {
   margin-top: 10px;
   text-align: right;
   font-size: 28px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}
+
+.egg-collect-count-and-icon-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.egg-collect-count{
+  font-size: 48px;
   font-family: "Oswald", sans-serif;
   font-weight: 500;
 }
