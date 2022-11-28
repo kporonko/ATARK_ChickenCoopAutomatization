@@ -6,6 +6,8 @@ import {ICoop} from "../interfaces/ICoop";
 import {getCoop} from "../fetch/fetchData";
 import CoopElementDesc from "../components/CoopElementDesc";
 import CoopDesc from "../components/CoopDesc";
+import Feedings from "../components/Feedings";
+import EggCollects from "../components/EggCollects";
 
 const CoopDescriptionPage = () => {
 
@@ -28,6 +30,9 @@ const CoopDescriptionPage = () => {
             <HeaderSection text={`Coop `} additionalText={coop?.name}/>
             <CoopDesc coop={coop}/>
             <HeaderSection text={`Information `}/>
+
+            <Feedings feedings={coop?.allFeedingsHistory}/>
+            <EggCollects/>
         </div>
     );
 };
