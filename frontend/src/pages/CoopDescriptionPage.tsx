@@ -27,6 +27,7 @@ const CoopDescriptionPage = () => {
             <NavMenu indexActive={2}/>
             <HeaderSection text={`Coop `} additionalText={coop?.name}/>
             <CoopDesc coop={coop}/>
+            <HeaderSection text={`Information `}/>
         </div>
     );
 };

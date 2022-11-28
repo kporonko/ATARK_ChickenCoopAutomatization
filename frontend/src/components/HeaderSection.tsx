@@ -8,12 +8,14 @@ const HeaderSection = (props: {text: string, additionalText?: string}) => {
         en:{
             myCoops:"My Coops",
             add: "Add New Coop",
-            coop: 'Coop '
+            coop: 'Coop ',
+            info: "Information"
         },
         ru: {
             myCoops:"Мои Курятники",
             add: "Добавить новый курятник",
-            coop: 'Курятник '
+            coop: 'Курятник ',
+            info: 'Информация'
         }
     });
 
@@ -24,6 +26,8 @@ const HeaderSection = (props: {text: string, additionalText?: string}) => {
             return strings.add;
         if (text === 'Coop ')
             return strings.coop;
+        if (text === 'Information ')
+            return strings.info;
     }
 
     return (
