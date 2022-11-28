@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getAllProfileCoops} from "../fetch/fetchData";
 import {IProfileCoops} from "../interfaces/IProfileCoops";
-import CoopDesc from "./CoopDesc";
+import CoopElementDesc from "./CoopElementDesc";
 import {ICoopSmallDesc} from "../interfaces/ICoopSmallDesc";
 import Loader from "./Loader";
 import {Link} from "react-router-dom";
@@ -22,7 +22,7 @@ const CoopsList = () => {
         <div className='coops-wrapper'>
             {coops !== undefined ? coops.map((coop, ind) => (
                 <Link style={{textDecoration: 'none'}} key={ind} to={`/coop/${coop.id}`}>
-                    <CoopDesc key={ind} name={coop.name} eggsCount={coop.eggsByWeek}/>
+                    <CoopElementDesc key={ind} name={coop.name} eggsCount={coop.eggsByWeek}/>
                 </Link>
             )) : <Loader/>}
         </div>

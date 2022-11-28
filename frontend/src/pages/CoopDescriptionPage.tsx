@@ -4,6 +4,8 @@ import NavMenu from "../components/NavMenu";
 import HeaderSection from "../components/HeaderSection";
 import {ICoop} from "../interfaces/ICoop";
 import {getCoop} from "../fetch/fetchData";
+import CoopElementDesc from "../components/CoopElementDesc";
+import CoopDesc from "../components/CoopDesc";
 
 const CoopDescriptionPage = () => {
 
@@ -20,11 +22,11 @@ const CoopDescriptionPage = () => {
         }
         getCoopData()
     }, [])
-    console.log(coop?.name)
     return (
         <div>
             <NavMenu indexActive={2}/>
             <HeaderSection text={`Coop `} additionalText={coop?.name}/>
+            <CoopDesc coop={coop}/>
         </div>
     );
 };
