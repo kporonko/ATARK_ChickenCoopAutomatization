@@ -3,6 +3,7 @@ import {IRegisterUser} from "../interfaces/IRegisterUser";
 import {ICoopAdd} from "../interfaces/ICoopAdd";
 import {IProfileCoops} from "../interfaces/IProfileCoops";
 import {ICoopSmallDesc} from "../interfaces/ICoopSmallDesc";
+import {ICoop} from "../interfaces/ICoop";
 
 export const BASE_URL = 'https://localhost:7290/';
 
@@ -67,5 +68,17 @@ export const getAllProfileCoops = async (profileId: number) => {
 
     const body = await response.json();
     const res = body as ICoopSmallDesc[];
+    return res;
+}
+
+export const getCoop = async (coopId: number) => {
+    const response = await fetch(`${BASE_URL}Coop/coop/${coopId}`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        }});
+
+    const body = await response.json();
+    const res = body as ICoop;
     return res;
 }
