@@ -174,7 +174,7 @@ namespace Backend.Core.Services
             List<CoopDto> resList = new List<CoopDto>();
             foreach (Coop coop in coops)
             {
-                CoopDto coopDto = new CoopDto { Name = coop.CoopName, EggsByWeek = CountEggsThisWeek(GetEggCollects(coop)) };
+                CoopDto coopDto = new CoopDto { Name = coop.CoopName, EggsByWeek = CountEggsThisWeek(GetEggCollects(coop)), Id = coop.CoopId };
                 resList.Add(coopDto);
             }
             return resList;

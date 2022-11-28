@@ -3,6 +3,7 @@ import NavMenu from "../components/NavMenu";
 import HeaderSection from "../components/HeaderSection";
 import AddCoopButton from "../components/AddCoopButton";
 import ModalAddCoop from "../components/ModalAddCoop";
+import CoopsList from "../components/CoopsList";
 
 const CoopsListPage = () => {
     const [modalActive, setModalActive] = useState(false);
@@ -13,6 +14,7 @@ const CoopsListPage = () => {
             <HeaderSection text={"My Coops"}/>
             <AddCoopButton setIsActive={setModalActive} isSubmit={false}/>
             <ModalAddCoop isActive={modalActive} setIsActive={setModalActive}/>
+            <CoopsList/>
         </div>
     );
 };

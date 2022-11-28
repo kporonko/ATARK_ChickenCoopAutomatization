@@ -271,3 +271,81 @@ code {
   font-size: 22px;
   border-radius: 10px;
 }
+
+/* Coop */
+.coops-wrapper{
+  margin: 2% 20%;
+}
+.coop-wrapper{
+  position: relative;
+  margin: 80px 0;
+  background: #4d4c4c;
+  border-radius: 200px;
+  padding: 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.coop-wrapper:hover{
+  transform: scale(1.05);
+  background: #d2cfcf;
+  transition: all 0.7s ease;
+}
+
+.coop-wrapper:hover .coop-info-name{
+  color: black;
+  transition: all 0.7s ease;
+}
+
+.coop-wrapper:hover .coop-info-eggs{
+  color: black;
+  transition: all 0.7s ease;
+}
+
+.coop-icon{
+  width: 150px;
+}
+
+.coop-icon-wrapper{
+  margin-left: 15%;
+}
+.coop-info{
+  margin-right: 15%;
+}
+.coop-info-name{
+  font-family: "Oswald", sans-serif;
+  font-size: 44px;
+  color: white;
+  text-align: right;
+  margin: 0 0 10px 0;
+}
+.coop-info-eggs{
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  font-weight: 100;
+  color: white;
+  text-align: right;
+  margin: 0;
+}
+
+.coop-temp-circle{
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  transform:translate(50%,-50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #4da6ff;
+  mix-blend-mode:darken;
+}
+.coop-temp-circle-text{
+  position: absolute;
+  top: 32%;
+  right: 24%;
+
+  font-size: 38px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  color: white;
+}

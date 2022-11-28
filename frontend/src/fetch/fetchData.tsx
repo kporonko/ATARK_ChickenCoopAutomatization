@@ -1,6 +1,8 @@
 import {ILoginUser} from "../interfaces/ILoginUser";
 import {IRegisterUser} from "../interfaces/IRegisterUser";
 import {ICoopAdd} from "../interfaces/ICoopAdd";
+import {IProfileCoops} from "../interfaces/IProfileCoops";
+import {ICoopSmallDesc} from "../interfaces/ICoopSmallDesc";
 
 export const BASE_URL = 'https://localhost:7290/';
 
@@ -40,7 +42,6 @@ export const register = async (user: IRegisterUser) => {
 }
 
 export const addCoop = async (coop: ICoopAdd) => {
-    console.log(coop)
     const response = await fetch(`${BASE_URL}Coop/coop`, {
         method: 'POST',
         body: JSON.stringify({
@@ -57,3 +58,14 @@ export const addCoop = async (coop: ICoopAdd) => {
     return response.status;
 }
 
+export const getAllProfileCoops = async (profileId: number) => {
+    const response = await fetch(`${BASE_URL}Coop/coops/${profileId}`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        }});
+
+    const body = await response.json();
+    const res = body as ICoopSmallDesc[];
+    return res;
+}
