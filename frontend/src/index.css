@@ -447,7 +447,12 @@ code {
   border-radius: 100px;
   border: 5px solid black;
 }
-
+.feeding:hover{
+  transform: scale(1.05);
+  color: white;
+  background: black;
+  transition: all 1s ease;
+}
 .feeding-icon{
   width: 150px;
 }
