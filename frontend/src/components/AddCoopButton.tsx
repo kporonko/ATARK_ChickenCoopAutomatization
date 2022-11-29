@@ -23,6 +23,7 @@ const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<Re
             const statusResponse = await addCoop({ coopName: props.name, ipThermometer: props.id.toString(), profileId: +idUser} as ICoopAdd)
             if (statusResponse === 201){
                 alert("Ok")
+                window.location.reload()
             }
             else{
                 alert("Oops... Something went wrong")

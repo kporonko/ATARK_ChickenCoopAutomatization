@@ -29,6 +29,7 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
     const [name, setName] = useState('');
     const [id, setId] = useState(0);
 
+
     return (
         <div
             className={props.isActive? "modal-add-coop-wrap" : "modal-add-coop-wrap-hidden"}
