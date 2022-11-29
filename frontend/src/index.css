@@ -478,3 +478,17 @@ code {
   font-family: "Oswald", sans-serif;
   font-weight: 500;
 }
+
+.coop-option-text{
+  margin-top: 20px;
+  font-weight: 100;
+  font-size: 34px;
+}
+.coop-option-text:hover{
+  cursor: pointer;
+  color: #43FF00;
+  transition: all 0.5s ease;
+}
+.coop-option-active{
+  color: #2ea803;
+}

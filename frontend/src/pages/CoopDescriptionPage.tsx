@@ -8,11 +8,14 @@ import CoopElementDesc from "../components/CoopElementDesc";
 import CoopDesc from "../components/CoopDesc";
 import Feedings from "../components/Feedings";
 import EggCollects from "../components/EggCollects";
+import LocalizedStrings from "react-localization";
+import MenuCoopInfo from "../components/MenuCoopInfo";
 
 const CoopDescriptionPage = () => {
 
     const {id} = useParams()
     const [coop, setCoop] = useState<ICoop>({allFeedingsHistory: [], eggsByWeek: 0, name: "", eggCollects: {string:-1}})
+    const [indexActive, setIndexActive] = useState<number>(0)
 
     useEffect(() => {
         const getCoopData = async () => {
@@ -30,8 +33,8 @@ const CoopDescriptionPage = () => {
             <CoopDesc coop={coop}/>
             <HeaderSection text={`Information `}/>
 
-            <Feedings feedings={coop?.allFeedingsHistory}/>
-            <EggCollects collects={coop?.eggCollects}/>
+            <MenuCoopInfo coop={coop} indexActive={indexActive} setIndexActive={setIndexActive}/>
+
         </div>
     );
 };

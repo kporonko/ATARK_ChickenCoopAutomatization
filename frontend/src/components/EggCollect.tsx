@@ -2,11 +2,6 @@ import React from 'react';
 import {getTime, getDate} from "../functions/functions";
 
 const EggCollect = (props: {date: string, count: number}) => {
-    // console.log('second props.date')
-    // console.log(props.date)
-    //
-    // console.log('second props.date')
-    // console.log(props.count)
     return (
         <div className='feeding'>
             <div className='egg-collect-count-and-icon-wrapper'>
