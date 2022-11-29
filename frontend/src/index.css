@@ -234,6 +234,7 @@ code {
   justify-content: center;
   align-items: center;
   transition: 1s;
+  z-index: 1;
 }
 
 .modal-add-coop-wrap-hidden{
