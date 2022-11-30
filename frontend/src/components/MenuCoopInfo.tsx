@@ -3,6 +3,7 @@ import LocalizedStrings from "react-localization";
 import Feedings from "./Feedings";
 import EggCollects from "./EggCollects";
 import {ICoop} from "../interfaces/ICoop";
+import EmptyComponent from "./EmptyComponent";
 
 const MenuCoopInfo = (props: {indexActive: number, coop: ICoop, setIndexActive: React.Dispatch<React.SetStateAction<number>>}) => {
 
@@ -24,8 +25,8 @@ const MenuCoopInfo = (props: {indexActive: number, coop: ICoop, setIndexActive: 
     }
     const handleClick1 = () => {
         props.setIndexActive(1)
-
     }
+
     return (
         <div>
             <div style={{display:'flex', justifyContent: "center", gap: '200px'}}>
@@ -36,7 +37,7 @@ const MenuCoopInfo = (props: {indexActive: number, coop: ICoop, setIndexActive: 
                     {strings.eggCol}
                 </div>
             </div>
-            {props.indexActive === 0 ? <Feedings feedings={props.coop?.allFeedingsHistory}/> : props.indexActive === 1 ? <EggCollects collects={props.coop?.eggCollects}/> : ''}
+            {props.indexActive === 0 ? (props.coop?.allFeedingsHistory.length > 0 ? <Feedings feedings={props.coop?.allFeedingsHistory}/> : <EmptyComponent/>) : props.indexActive === 1 ? ( Object.keys(props.coop?.eggCollects).length > 0 ? <EggCollects collects={props.coop?.eggCollects}/> : <EmptyComponent/>) : ''}
         </div>
     );
 };
