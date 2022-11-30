@@ -4,7 +4,7 @@ import {getTemperature} from "../fetch/fetchData";
 import useSound from 'use-sound';
 import ModalAddCoop from "./ModalAddCoop";
 
-const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string}) => {
+const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string, isActive: boolean, setIsActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [modalActive, setModalActive] = useState(false);
 
     let strings = new LocalizedStrings({
@@ -26,17 +26,18 @@ const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: str
     }
 
 
-    const checkTemp = (url: string) => {
+    const checkTemp = () => {
         if (temp < 15 || temp > 18){
-            const audio = new Audio(url);
-            audio.loop = false;
-            audio.play()
+            props.setIsActive(true)
+        }
+        else{
+            props.setIsActive(false)
         }
     }
 
     useEffect(() => {
         const interval = window.setInterval(getTemp, 2000)
-        setInterval(() => checkTemp(require('../assets/Cowbell.mp3')), 10000)
+        setInterval(() => checkTemp(), 10000)
     }, [])
 
     return (
