@@ -18,6 +18,9 @@ export const login = async (user: ILoginUser) => {
     const body = await response.json();
     if (response.status === 200) {
         localStorage.setItem("id", body.profileId)
+        localStorage.setItem("firstFeeding", body.firstFeeding)
+        localStorage.setItem("secondFeeding", body.secondFeeding)
+        localStorage.setItem("email", body.email)
         return true;
     }
     return false;

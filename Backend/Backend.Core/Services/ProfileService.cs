@@ -98,7 +98,7 @@ namespace Backend.Core.Services
         /// <returns>Dto of profile.</returns>
         private ProfileDto ConvertProfileIntoDto(Profile profile)
         {
-            ProfileDto dto = new ProfileDto { ProfileId = profile.ProfileId };
+            ProfileDto dto = new ProfileDto { ProfileId = profile.ProfileId, Email = profile.Login, FirstFeeding = profile.TimeOfFirstFeeding, SecondFeeding = profile.TimeOfSecondFeeding };
             return dto;
         }
 

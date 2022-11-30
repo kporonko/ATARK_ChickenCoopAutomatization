@@ -547,3 +547,22 @@ code {
 .temp-green{
   background: #43FF00;
 }
+
+/* Timer */
+
+.timer-feeding-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.timer-feeding{
+ text-align: center;
+  font-size: 48px;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+}
+.timer-feeding-text{
+  text-align: center;
+  font-size: 28px;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+}
