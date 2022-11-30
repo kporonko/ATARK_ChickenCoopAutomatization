@@ -11,5 +11,7 @@ namespace Backend.Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int EggsByWeek  { get; set; }
+        public string ThermometerIp { get; set; }
+        public string ThermometerApiKey { get; set; }
     }
 }

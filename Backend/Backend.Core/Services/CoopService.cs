@@ -73,7 +73,7 @@ namespace Backend.Core.Services
         /// <returns>List of coop dto by profile.</returns>
         public List<CoopDto> GetAllProfileCoops(int profileId)
         {
-            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Include(x => x.EggCollects).Where(x => x.ProfileId == profileId).ToList();
+            List<Coop> profileCoops = _context.Coops.Include(x => x.Profile).Include(x => x.EggCollects).Include(x => x.Thermometer).Where(x => x.ProfileId == profileId).ToList();
             List<CoopDto> resList = ConvertProfileCoopsToCoopsDtoList(profileCoops);
             return resList;
         }
@@ -174,7 +174,7 @@ namespace Backend.Core.Services
             List<CoopDto> resList = new List<CoopDto>();
             foreach (Coop coop in coops)
             {
-                CoopDto coopDto = new CoopDto { Name = coop.CoopName, EggsByWeek = CountEggsThisWeek(GetEggCollects(coop)), Id = coop.CoopId };
+                CoopDto coopDto = new CoopDto { Name = coop.CoopName, EggsByWeek = CountEggsThisWeek(GetEggCollects(coop)), Id = coop.CoopId, ThermometerIp = coop.Thermometer.IP, ThermometerApiKey = coop.Thermometer.ApiKey };
                 resList.Add(coopDto);
             }
             return resList;
@@ -187,7 +187,7 @@ namespace Backend.Core.Services
         /// <returns>Dto with coop info and info about feedings.</returns>
         private CoopWithFeedingDto ConvertCoopToCoopWithFeedingDto(Coop coop)
         {
-            CoopWithFeedingDto resCoopInfo = new CoopWithFeedingDto { Name = coop.CoopName, TemperatureCelsius = coop.Thermometer.TemperatureCelsius };
+            CoopWithFeedingDto resCoopInfo = new CoopWithFeedingDto { Name = coop.CoopName, TemperatureCelsius = coop.Thermometer.TemperatureCelsius, ThermometerIp = coop.Thermometer.IP, ThermometerApiKey = coop.Thermometer.ApiKey };
             resCoopInfo.EggCollects = GetEggCollects(coop);
             resCoopInfo.AllFeedingsHistory = GetAllFeedingsHistory(coop);
             resCoopInfo.EggsByWeek = CountEggsThisWeek(resCoopInfo.EggCollects);
