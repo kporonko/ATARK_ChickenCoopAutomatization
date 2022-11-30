@@ -81,7 +81,7 @@ const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Di
 
                 <div>
                     <h3 className="coop-desc-info-temp-text">{strings.temp}:</h3>
-                    <div className='coop-desc-info-temp-oval'>
+                    <div className={`coop-desc-info-temp-oval ${props.temp < 18 && props.temp > 15 ? 'temp-green' : 'temp-red'}`}>
                         <div className="coop-desc-info-temp">{props.temp}&deg;C</div>
                     </div>
                 </div>

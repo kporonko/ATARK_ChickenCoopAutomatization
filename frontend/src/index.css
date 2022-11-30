@@ -442,11 +442,6 @@ code {
 }
 .coop-desc-info-temp-oval{
   width: fit-content;
-
-  /* to fix*/
-  background: blue;
-  /*       */
-
   border-radius: 30px;
   padding: 10px 70px;
   margin: auto auto 20px;
@@ -535,4 +530,13 @@ code {
   font-size: 68px;
   font-family: "Oswald", sans-serif;
   font-weight: 500;
+}
+
+/* Temperature */
+
+.temp-red{
+  background: red;
+}
+.temp-green{
+  background: #43FF00;
 }
