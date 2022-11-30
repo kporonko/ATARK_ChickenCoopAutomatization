@@ -65,7 +65,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("coop/{id}")]
-        public ActionResult<List<CoopDto>> GetCoopById([FromRoute] int id)
+        public ActionResult<CoopWithFeedingDto> GetCoopById([FromRoute] int id)
         {
             var result = _coopService.GetCoopById(id);
             if (result is null)
