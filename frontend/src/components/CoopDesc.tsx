@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ICoop} from "../interfaces/ICoop";
 import LocalizedStrings from "react-localization";
 import { confirmAlert } from 'react-confirm-alert';
@@ -29,14 +29,18 @@ const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Di
 
     const getTemp = async () => {
         if (props.coop?.thermometerIp !== undefined && props.coop?.thermometerApiKey !== undefined){
-            const data = await getTemperature(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
-            props.setTemp(data);
+            // const data = await getTemperature(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
+            // props.setTemp(data);
             const dataChart = await getTemperatureForChart(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
+            props.setTemp(dataChart[dataChart.length - 1].field1)
             setTempChart(dataChart)
+            clearInterval(interval)
         }
     }
 
     const interval = window.setInterval(getTemp, 2000)
+
+    // ????
 
     const {id} = useParams()
     const nav = useNavigate()
