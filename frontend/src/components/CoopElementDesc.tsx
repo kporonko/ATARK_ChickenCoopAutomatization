@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import LocalizedStrings from "react-localization";
 import {getTemperature} from "../fetch/fetchData";
+import useSound from 'use-sound';
+import ModalAddCoop from "./ModalAddCoop";
 
 const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string}) => {
+    const [modalActive, setModalActive] = useState(false);
 
     let strings = new LocalizedStrings({
         en:{
@@ -22,15 +25,25 @@ const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: str
         }
     }
 
-    const interval = window.setInterval(getTemp, 2000)
 
+    const checkTemp = (url: string) => {
+        if (temp < 15 || temp > 18){
+            const audio = new Audio(url);
+            audio.loop = false;
+            audio.play()
+        }
+    }
+
+    useEffect(() => {
+        const interval = window.setInterval(getTemp, 2000)
+        setInterval(() => checkTemp(require('../assets/Cowbell.mp3')), 10000)
+    }, [])
 
     return (
         <div className='coop-wrapper'>
             <div className='coop-icon-wrapper'>
                 <img className='coop-icon' src={require('../assets/7415381.png')} alt=""/>
             </div>
-
             <div className='coop-info'>
                 <div>
                     <h3 className='coop-info-name'>{props.name}</h3>
