@@ -11,5 +11,6 @@ namespace Backend.Core.Models
         public string CoopName { get; set; }
         public int ProfileId { get; set; }
         public string? IpThermometer { get; set; }
+        public string? ApiKey { get; set; }
     }
 }

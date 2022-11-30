@@ -29,8 +29,8 @@ namespace Backend.Core.Services
                 return HttpStatusCode.BadRequest;
        
             Coop addCoop = new Coop { CoopName = coop.CoopName, Profile = profile, ProfileId = profile.ProfileId };
-            if (coop.IpThermometer != null)
-                addCoop.Thermometer = new Thermometer { IP = coop.IpThermometer };
+            if (coop.IpThermometer != null && coop.ApiKey != null)
+                addCoop.Thermometer = new Thermometer { IP = coop.IpThermometer, ApiKey = coop.ApiKey };
 
             AddToDbCoopObject(addCoop);
             return HttpStatusCode.Created;
