@@ -5,10 +5,10 @@ const Chart = (props: {data: ITempDto[]}) => {
     return (
         <div>
             <LineChart
-                width={600}
-                height={600}
+                width={800}
+                height={400}
                 data={props.data}
-                margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+                margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
             >
                 <XAxis dataKey="created_at" />
                 <YAxis />

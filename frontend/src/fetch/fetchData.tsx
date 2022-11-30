@@ -113,7 +113,7 @@ export const getTemperature = async (ip: string, key: string) => {
 }
 
 export const getTemperatureForChart = async (ip: string, key: string) => {
-    const response = await fetch(`${BASE_URL_THINGS_SPEAK}channels/${ip}/fields/1.json?api_key=${key}&results=1`, {
+    const response = await fetch(`${BASE_URL_THINGS_SPEAK}channels/${ip}/fields/1.json?api_key=${key}&results=100`, {
         method: 'GET',
         headers:{
             'Content-Type': 'application/json'
