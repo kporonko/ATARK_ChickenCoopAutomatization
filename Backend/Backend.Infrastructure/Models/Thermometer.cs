@@ -11,6 +11,7 @@ namespace Backend.Infrastructure.Models
         public int ThermometerId { get; set; }
         public string IP { get; set; }
         public double TemperatureCelsius { get; set; }
+        public string ApiKey { get; set; }
         public Coop Coop { get; set; }
     }
 }

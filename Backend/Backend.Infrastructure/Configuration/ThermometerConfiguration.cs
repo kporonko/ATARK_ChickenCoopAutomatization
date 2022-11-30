@@ -29,6 +29,10 @@ namespace Backend.Infrastructure.Configuration
                 .Property(x => x.TemperatureCelsius)
                 .HasColumnName("TemperatureCelsius")
                 .HasColumnType("float");
+            builder
+                .Property(x => x.ApiKey)
+                .HasColumnName("ApiKey")
+                .HasColumnType("varchar(max)");
         }
     }
 }
