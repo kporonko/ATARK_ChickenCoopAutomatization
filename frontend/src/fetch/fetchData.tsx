@@ -49,7 +49,7 @@ export const addCoop = async (coop: ICoopAdd) => {
             "coopName": coop.coopName,
             "profileId": coop.profileId,
             "ipThermometer": coop.ipThermometer,
-
+            "apiKey": coop.apiKey,
         }),
         headers: {
             'Content-Type': 'application/json',

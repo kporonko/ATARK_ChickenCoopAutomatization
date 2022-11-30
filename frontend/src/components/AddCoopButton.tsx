@@ -5,7 +5,7 @@ import submit = Simulate.submit;
 import {addCoop} from "../fetch/fetchData";
 import {ICoopAdd} from "../interfaces/ICoopAdd";
 
-const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<React.SetStateAction<boolean>>, name?: string, id?: number}) => {
+const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<React.SetStateAction<boolean>>, name?: string, id?: number, apiKey?: string}) => {
 
     let strings = new LocalizedStrings({
         en:{
@@ -20,7 +20,7 @@ const AddCoopButton = (props: {isSubmit: boolean, setIsActive: React.Dispatch<Re
     const handleSubmit = async () => {
         const idUser = localStorage.getItem("id");
         if (idUser !== null && props.name !== undefined && props.id !== undefined && props.name.length > 0){
-            const statusResponse = await addCoop({ coopName: props.name, ipThermometer: props.id.toString(), profileId: +idUser} as ICoopAdd)
+            const statusResponse = await addCoop({ coopName: props.name, ipThermometer: props.id.toString(), apiKey: props.apiKey, profileId: +idUser} as ICoopAdd)
             if (statusResponse === 201){
                 alert("Ok")
                 window.location.reload()

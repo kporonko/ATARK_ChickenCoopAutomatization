@@ -12,8 +12,10 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
             add:"Add New Coop",
             name: "Coop Name",
             enterName: "Enter coop name...",
-            id: "Enter Thingspeak channel id",
-            enterId: "Введите имя курятника...",
+            id: "Thingspeak channel id",
+            enterId: "Enter Thingspeak channel id...",
+            apiKey: "ThingSpeak channel ApiKey",
+            enterApiKey: "Enter ThingSpeak channel ApiKey..."
         },
         ru: {
             add:"Добавить Новый Курятник",
@@ -21,6 +23,8 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
             enterName: "Введите имя курятника...",
             id: "ID канала Thing Speak",
             enterId: "Введите ID канала Thing Speak...",
+            apiKey: "ApiKey канала ThingSpeak",
+            enterApiKey: "Введите ApiKey канала ThingSpeak..."
         }
     });
 
@@ -28,6 +32,7 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
 
     const [name, setName] = useState('');
     const [id, setId] = useState(0);
+    const [apiKey, setApiKey] = useState('');
 
 
     return (
@@ -45,7 +50,7 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
                     <HeaderSection text={'Add New Coop'}/>
                 </div>
                 <form className='form-modal-add-coop'>
-                    <div style={{margin: '30px 0'}}>
+                    <div style={{margin: '20px 0'}}>
                         <div style={{margin: '10px 0'}}>
                             <label className="modal-add-coop-form-label" htmlFor="coopName">{strings.name}</label>
                         </div>
@@ -60,7 +65,7 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
                         </div>
                     </div>
 
-                    <div style={{margin: '30px 0'}}>
+                    <div style={{margin: '20px 0'}}>
                         <div style={{margin: '10px 0'}}>
                             <label className="modal-add-coop-form-label" htmlFor="channelId">{strings.id}</label>
                         </div>
@@ -76,8 +81,22 @@ const ModalAddCoop = (props: {isActive: boolean, setIsActive:  React.Dispatch<Re
                         </div>
                     </div>
 
+                    <div style={{margin: '20px 0'}}>
+                        <div style={{margin: '10px 0'}}>
+                            <label className="modal-add-coop-form-label" htmlFor="coopName">{strings.apiKey}</label>
+                        </div>
+                        <div>
+                            <input
+                                className="modal-add-coop-form-input"
+                                id="coopName" value={apiKey}
+                                type="text"
+                                placeholder={strings.enterApiKey}
+                                onChange={(e) => setApiKey(e.target.value)}
+                            />
+                        </div>
+                    </div>
                     <div style={{margin: '40px 0'}}>
-                        <AddCoopButton name={name} id={id} setIsActive={() => {}} isSubmit={true}/>
+                        <AddCoopButton apiKey={apiKey} name={name} id={id} setIsActive={() => {}} isSubmit={true}/>
                     </div>
                 </form>
             </div>
