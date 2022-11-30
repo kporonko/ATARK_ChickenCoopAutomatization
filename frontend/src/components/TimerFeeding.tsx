@@ -5,6 +5,8 @@ import LocalizedStrings from "react-localization";
 const TimerFeeding = () => {
 
 
+    const [time, setTime] = useState('')
+
     let ff = localStorage.getItem('firstFeeding');
     let sf = localStorage.getItem('secondFeeding')
 
@@ -28,19 +30,21 @@ const TimerFeeding = () => {
         const secondTime = date2.getTime() - getCurrTime().getTime();
 
         if (firstTime > 0 && secondTime < 0)
-            return convertMsToTime(firstTime);
+             setTime(convertMsToTime(firstTime));
         else if (firstTime < 0 && secondTime > 0)
-            return convertMsToTime(secondTime);
+            setTime(convertMsToTime(secondTime));
         else if (firstTime > 0 && secondTime > 0){
             if (firstTime >= secondTime)
-                return convertMsToTime(secondTime)
+                setTime(convertMsToTime(secondTime))
             else
                 return convertMsToTime(firstTime)
         }
         else if (firstTime < 0 && secondTime < 0){
-            return strings.done;
+            return setTime(strings.done);
         }
     }
+
+    setInterval(getTimeToFeeding, 1000)
 
     const getCurrTime = () => {
         return new Date()
@@ -51,7 +55,7 @@ const TimerFeeding = () => {
             <div>
                 <div className='timer-feeding-text'>{strings.left}</div>
                 <div className='timer-feeding'>
-                    {getTimeToFeeding()}
+                    {time}
                 </div>
             </div>
         </div>
