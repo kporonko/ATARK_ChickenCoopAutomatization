@@ -1,6 +1,11 @@
 import React from 'react';
 import {ICoop} from "../interfaces/ICoop";
 import LocalizedStrings from "react-localization";
+import { confirmAlert } from 'react-confirm-alert';
+import {useParams} from "react-router";
+import {deleteCoop} from "../fetch/fetchData";
+import {useNavigate} from "react-router-dom"; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const CoopDesc = (props: {coop: ICoop|undefined}) => {
 
@@ -17,6 +22,31 @@ const CoopDesc = (props: {coop: ICoop|undefined}) => {
         }
     });
 
+    const {id} = useParams()
+    const nav = useNavigate()
+    const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        console.log("aa")
+        confirmAlert({
+            message:'Are you sure to delete the '+ props.coop?.name+ ' Coop ?',
+            title: 'Confirm To Delete',
+            buttons:[
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        const res = await deleteCoop(+id!)
+                        if(res === 400)
+                            alert("Oops... Something went wrong")
+                        else
+                            nav('/my-coops')
+                    }
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        })
+    }
 
     return (
         <div className='coop-desc-wrapper'>
@@ -25,6 +55,9 @@ const CoopDesc = (props: {coop: ICoop|undefined}) => {
             </div>
 
             <div className='coop-desc-info-wrapper'>
+                <div className='button-delete-wrapper'>
+                    <button onClick={(e) => handleDelete(e)} className="button-delete"><i className="fa fa-trash"></i></button>
+                </div>
                 <div>
                     <h2 className='coop-desc-info-name'>{strings.coop}</h2>
                     <h2 className='coop-desc-info-name'>"{props.coop?.name}"</h2>

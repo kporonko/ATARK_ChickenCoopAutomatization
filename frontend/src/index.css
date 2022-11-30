@@ -377,6 +377,23 @@ code {
   background: white;
   border-radius: 50px;
   margin-bottom: 30px;
+  position: relative;
+}
+.button-delete-wrapper{
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  border: none;
+}
+.button-delete{
+  background-color: white; /* Blue background */
+  border: none; /* Remove borders */
+  font-size: 36px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+.button-delete:hover{
+  transform: scale(1.2);
+  transition: 0.5s ease;
 }
 .coop-desc-info-name{
   text-align: center;
@@ -497,4 +514,8 @@ code {
 }
 .coop-option-active{
   color: #2ea803;
+}
+
+.fa-trash{
+  color: red;
 }

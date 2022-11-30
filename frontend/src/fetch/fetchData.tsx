@@ -82,3 +82,15 @@ export const getCoop = async (coopId: number) => {
     const res = body as ICoop;
     return res;
 }
+
+export const deleteCoop = async (coopId: number) => {
+    const response = await fetch(`${BASE_URL}Coop/coop`, {
+        method: 'DELETE',
+        body: JSON.stringify({
+            "coopId": coopId,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        }});
+    return response.status;
+}
