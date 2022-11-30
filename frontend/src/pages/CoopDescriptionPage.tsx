@@ -18,7 +18,7 @@ const CoopDescriptionPage = () => {
     const [coop, setCoop] = useState<ICoop>({allFeedingsHistory: [], eggsByWeek: 0, name: "", eggCollects: {string:-1}})
     const [indexActive, setIndexActive] = useState<number>(0)
 
-    const [temp, setTemp] = useState<number>()
+    const [temp, setTemp] = useState<number>(0)
 
     // useEffect(() => {
     //     const getTemp = async () => {
@@ -31,15 +31,6 @@ const CoopDescriptionPage = () => {
     //
     // })
 
-    const getTemp = async () => {
-        if (coop.thermometerIp !== undefined && coop.thermometerApiKey !== undefined){
-            const data = await getTemperature(coop.thermometerIp, coop.thermometerApiKey);
-            setTemp(data);
-            console.log(data)
-        }
-    }
-
-    const interval = window.setInterval(getTemp, 10000)
 
     useEffect(() => {
         const getCoopData = async () => {
@@ -54,7 +45,7 @@ const CoopDescriptionPage = () => {
         <div>
             <NavMenu indexActive={2}/>
             <HeaderSection text={`Coop `} additionalText={coop?.name}/>
-            <CoopDesc coop={coop}/>
+            <CoopDesc coop={coop} temp={temp} setTemp={setTemp}/>
             <HeaderSection text={`Information `}/>
 
             <MenuCoopInfo coop={coop} indexActive={indexActive} setIndexActive={setIndexActive}/>

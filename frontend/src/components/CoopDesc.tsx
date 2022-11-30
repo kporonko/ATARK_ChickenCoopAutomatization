@@ -3,11 +3,11 @@ import {ICoop} from "../interfaces/ICoop";
 import LocalizedStrings from "react-localization";
 import { confirmAlert } from 'react-confirm-alert';
 import {useParams} from "react-router";
-import {deleteCoop} from "../fetch/fetchData";
+import {deleteCoop, getTemperature} from "../fetch/fetchData";
 import {useNavigate} from "react-router-dom"; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-const CoopDesc = (props: {coop: ICoop|undefined}) => {
+const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Dispatch<React.SetStateAction<number>>}) => {
 
     let strings = new LocalizedStrings({
         en:{
@@ -21,6 +21,15 @@ const CoopDesc = (props: {coop: ICoop|undefined}) => {
             temp: "Текущая температура в курятнике"
         }
     });
+
+    const getTemp = async () => {
+        if (props.coop?.thermometerIp !== undefined && props.coop?.thermometerApiKey !== undefined){
+            const data = await getTemperature(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
+            props.setTemp(data);
+        }
+    }
+
+    const interval = window.setInterval(getTemp, 2000)
 
     const {id} = useParams()
     const nav = useNavigate()
@@ -73,7 +82,7 @@ const CoopDesc = (props: {coop: ICoop|undefined}) => {
                 <div>
                     <h3 className="coop-desc-info-temp-text">{strings.temp}:</h3>
                     <div className='coop-desc-info-temp-oval'>
-                        <div className="coop-desc-info-temp">34,2&deg;C</div>
+                        <div className="coop-desc-info-temp">{props.temp}&deg;C</div>
                     </div>
                 </div>
             </div>
