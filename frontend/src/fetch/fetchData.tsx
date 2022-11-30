@@ -4,9 +4,10 @@ import {ICoopAdd} from "../interfaces/ICoopAdd";
 import {IProfileCoops} from "../interfaces/IProfileCoops";
 import {ICoopSmallDesc} from "../interfaces/ICoopSmallDesc";
 import {ICoop} from "../interfaces/ICoop";
+import {ICoopApiData} from "../interfaces/ICoopApiData";
 
 export const BASE_URL = 'https://localhost:7290/';
-
+export const BASE_URL_THINGS_SPEAK = "https://api.thingspeak.com/"
 export const login = async (user: ILoginUser) => {
     const response = await fetch(`${BASE_URL}Profile/login?login=${user.login}&password=${user.password}`, {
         method: 'GET',
@@ -94,3 +95,16 @@ export const deleteCoop = async (coopId: number) => {
         }});
     return response.status;
 }
+
+export const getTemperature = async (ip: string, key: string) => {
+    const response = await fetch(`${BASE_URL_THINGS_SPEAK}channels/${ip}/fields/1.json?api_key=${key}&results=1`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        }});
+
+    const body = await response.json();
+    const res = body.feeds[0].field1;
+    return res;
+}
+
