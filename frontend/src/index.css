@@ -519,3 +519,20 @@ code {
 .fa-trash{
   color: red;
 }
+
+/* Loader */
+
+.loader-wrap{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10% 30%;
+}
+.loader-gif{
+  width: 150px;
+}
+.loader-text{
+  font-size: 68px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}

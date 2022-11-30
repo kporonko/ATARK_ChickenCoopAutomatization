@@ -1,5 +1,6 @@
 import React from 'react';
 import NavMenu from "../components/NavMenu";
+import Loader from "../components/Loader";
 
 const AboutUsPage = () => {
     return (
