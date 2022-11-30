@@ -6,7 +6,7 @@ const TimerFeeding = () => {
 
 
     const [time, setTime] = useState('')
-
+    console.log(time)
     let ff = localStorage.getItem('firstFeeding');
     let sf = localStorage.getItem('secondFeeding')
 
@@ -28,7 +28,6 @@ const TimerFeeding = () => {
     const getTimeToFeeding = () => {
         const firstTime =  date1.getTime() - getCurrTime().getTime();
         const secondTime = date2.getTime() - getCurrTime().getTime();
-
         if (firstTime > 0 && secondTime < 0)
              setTime(convertMsToTime(firstTime));
         else if (firstTime < 0 && secondTime > 0)
@@ -37,10 +36,13 @@ const TimerFeeding = () => {
             if (firstTime >= secondTime)
                 setTime(convertMsToTime(secondTime))
             else
-                return convertMsToTime(firstTime)
+                setTime(convertMsToTime(firstTime))
         }
         else if (firstTime < 0 && secondTime < 0){
             return setTime(strings.done);
+        }
+        else{
+            console.log("aboba")
         }
     }
 
