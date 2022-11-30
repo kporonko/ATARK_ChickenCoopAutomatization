@@ -22,7 +22,7 @@ const CoopsList = () => {
         <div className='coops-wrapper'>
             {coops !== undefined ? coops.map((coop, ind) => (
                 <Link style={{textDecoration: 'none'}} key={ind} to={`/coop/${coop.id}`}>
-                    <CoopElementDesc key={ind} name={coop.name} eggsCount={coop.eggsByWeek}/>
+                    <CoopElementDesc key={ind} name={coop.name} eggsCount={coop.eggsByWeek} channelId={coop.thermometerIp} apiKey={coop.thermometerApiKey}/>
                 </Link>
             )) : <Loader/>}
         </div>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LocalizedStrings from "react-localization";
+import {getTemperature} from "../fetch/fetchData";
 
-const CoopElementDesc = (props: {name: string, eggsCount: number}) => {
+const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string}) => {
 
     let strings = new LocalizedStrings({
         en:{
@@ -11,6 +12,17 @@ const CoopElementDesc = (props: {name: string, eggsCount: number}) => {
             eggs:"Снесенных яиц за эту неделю",
         }
     });
+
+    const [temp, setTemp] = useState(0)
+
+    const getTemp = async () => {
+        if (props.channelId !== undefined && props.apiKey !== undefined){
+            const data = await getTemperature(props.channelId, props.apiKey);
+            setTemp(data);
+        }
+    }
+
+    const interval = window.setInterval(getTemp, 2000)
 
 
     return (
@@ -29,9 +41,9 @@ const CoopElementDesc = (props: {name: string, eggsCount: number}) => {
                 </div>
             </div>
 
-            <div className='coop-temp-circle'>
+            <div className={`coop-temp-circle ${temp > 15 && temp < 18 ? 'cooplist-coop-temp-green' : 'cooplist-coop-temp-red'}`}>
                 <div className='coop-temp-circle-text'>
-                    34,2&deg;C
+                    {temp}&deg;C
                 </div>
             </div>
         </div>

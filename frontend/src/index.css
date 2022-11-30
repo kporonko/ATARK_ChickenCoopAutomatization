@@ -344,10 +344,17 @@ code {
 
   mix-blend-mode:darken;
 }
+
+.cooplist-coop-temp-red{
+  background: red;
+}
+.cooplist-coop-temp-green{
+  background: #43FF00;
+}
 .coop-temp-circle-text{
   position: absolute;
   top: 32%;
-  right: 24%;
+  right: 14%;
 
   font-size: 38px;
   font-family: "Oswald", sans-serif;

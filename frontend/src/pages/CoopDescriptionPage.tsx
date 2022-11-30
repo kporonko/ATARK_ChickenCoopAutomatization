@@ -20,17 +20,6 @@ const CoopDescriptionPage = () => {
 
     const [temp, setTemp] = useState<number>(0)
 
-    // useEffect(() => {
-    //     const getTemp = async () => {
-    //         if (coop.thermometerIp !== undefined && coop.thermometerApiKey !== undefined){
-    //             const data = await getTemperature(coop.thermometerIp, coop.thermometerApiKey);
-    //             setTemp(data);
-    //         }
-    //     }
-    //     getTemp()
-    //
-    // })
-
 
     useEffect(() => {
         const getCoopData = async () => {
