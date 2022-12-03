@@ -5,6 +5,7 @@ import {IProfileCoops} from "../interfaces/IProfileCoops";
 import {ICoopSmallDesc} from "../interfaces/ICoopSmallDesc";
 import {ICoop} from "../interfaces/ICoop";
 import {ICoopApiData} from "../interfaces/ICoopApiData";
+import {ITempDto} from "../interfaces/ITempDto";
 
 export const BASE_URL = 'https://localhost:7290/';
 export const BASE_URL_THINGS_SPEAK = "https://api.thingspeak.com/"
@@ -111,3 +112,15 @@ export const getTemperature = async (ip: string, key: string) => {
     return res;
 }
 
+export const getTemperatureForChart = async (ip: string, key: string) => {
+    const response = await fetch(`${BASE_URL_THINGS_SPEAK}channels/${ip}/fields/1.json?api_key=${key}&results=100`, {
+        method: 'GET',
+        headers:{
+            'Content-Type': 'application/json'
+        }});
+
+    const body = await response.json();
+    const res = body.feeds as ITempDto[];
+    console.log(res)
+    return res;
+}

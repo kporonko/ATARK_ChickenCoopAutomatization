@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ICoop} from "../interfaces/ICoop";
 import LocalizedStrings from "react-localization";
 import { confirmAlert } from 'react-confirm-alert';
 import {useParams} from "react-router";
-import {deleteCoop, getTemperature} from "../fetch/fetchData";
+import {deleteCoop, getTemperature, getTemperatureForChart} from "../fetch/fetchData";
 import {useNavigate} from "react-router-dom"; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import {ITempDto} from "../interfaces/ITempDto";
+import Chart from "./Chart";
+import Loader from "./Loader"; // Import css
 
 const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Dispatch<React.SetStateAction<number>>}) => {
+
+    const [tempChart, setTempChart] = useState<ITempDto[]>()
 
     let strings = new LocalizedStrings({
         en:{
@@ -24,18 +29,23 @@ const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Di
 
     const getTemp = async () => {
         if (props.coop?.thermometerIp !== undefined && props.coop?.thermometerApiKey !== undefined){
-            const data = await getTemperature(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
-            props.setTemp(data);
+            // const data = await getTemperature(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
+            // props.setTemp(data);
+            const dataChart = await getTemperatureForChart(props.coop?.thermometerIp, props.coop?.thermometerApiKey);
+            props.setTemp(dataChart[dataChart.length - 1].field1)
+            setTempChart(dataChart)
+            clearInterval(interval)
         }
     }
 
     const interval = window.setInterval(getTemp, 2000)
 
+    // ????
+
     const {id} = useParams()
     const nav = useNavigate()
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log("aa")
         confirmAlert({
             message:'Are you sure to delete the '+ props.coop?.name+ ' Coop ?',
             title: 'Confirm To Delete',
@@ -85,6 +95,7 @@ const CoopDesc = (props: {coop: ICoop|undefined, temp: number, setTemp: React.Di
                         <div className="coop-desc-info-temp">{props.temp}&deg;C</div>
                     </div>
                 </div>
+                {tempChart !== undefined ? <Chart data={tempChart}/> : <Loader/>}
             </div>
         </div>
     );

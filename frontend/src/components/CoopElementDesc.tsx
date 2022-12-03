@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import LocalizedStrings from "react-localization";
-import {getTemperature} from "../fetch/fetchData";
+import {getTemperature, getTemperatureForChart} from "../fetch/fetchData";
 import useSound from 'use-sound';
 import ModalAddCoop from "./ModalAddCoop";
+import {ITempDto} from "../interfaces/ITempDto";
 
 const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string, isActive: boolean, setIsActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [modalActive, setModalActive] = useState(false);
