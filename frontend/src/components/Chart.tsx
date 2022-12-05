@@ -2,6 +2,11 @@ import React from 'react';
 import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
 import {ITempDto} from "../interfaces/ITempDto";
 const Chart = (props: {data: ITempDto[]}) => {
+
+    props.data.forEach((data, ind) => {
+        const a: Date = new Date(data.created_at)
+        data.created_at = a;
+    })
     return (
         <div>
             <LineChart
@@ -11,7 +16,7 @@ const Chart = (props: {data: ITempDto[]}) => {
                 margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
             >
                 <XAxis dataKey="created_at" />
-                <YAxis />
+                <YAxis type={"number"} domain={[20,23]}/>
                 <Tooltip />
                 <Legend/>
                 <CartesianGrid stroke="#f5f5f5" />
