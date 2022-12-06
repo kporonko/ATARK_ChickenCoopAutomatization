@@ -19,28 +19,12 @@ const CoopsList = () => {
         getCoops()
     }, [])
 
-    const [isPlay, setIsPlay] = useState(false)
-
-    const play = (url: string) => {
-        const audio = new Audio(url);
-        audio.loop = false;
-        if (isPlay){
-            audio.play()
-        }
-        else{
-            audio.pause()
-        }
-    }
-
-    useEffect(() => {
-        setInterval(() => play(require('../assets/Cowbell.mp3')), 10000)
-    }, [])
 
     return (
         <div className='coops-wrapper'>
             {coops !== undefined ? coops.map((coop, ind) => (
                 <Link style={{textDecoration: 'none'}} key={ind} to={`/coop/${coop.id}`}>
-                    <CoopElementDesc isActive={isPlay} setIsActive={setIsPlay} key={ind} name={coop.name} eggsCount={coop.eggsByWeek} channelId={coop.thermometerIp} apiKey={coop.thermometerApiKey}/>
+                    <CoopElementDesc index={ind} key={ind} name={coop.name} eggsCount={coop.eggsByWeek} channelId={coop.thermometerIp} apiKey={coop.thermometerApiKey}/>
                 </Link>
             )) : <Loader/>}
         </div>

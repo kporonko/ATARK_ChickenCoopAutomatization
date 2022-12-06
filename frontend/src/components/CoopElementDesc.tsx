@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 import LocalizedStrings from "react-localization";
 import {getTemperature, getTemperatureForChart} from "../fetch/fetchData";
-import useSound from 'use-sound';
-import ModalAddCoop from "./ModalAddCoop";
-import {ITempDto} from "../interfaces/ITempDto";
+import {Simulate} from "react-dom/test-utils";
+import { Store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 
-const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string, isActive: boolean, setIsActive: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: string, apiKey: string, index: number }) => {
     const [modalActive, setModalActive] = useState(false);
 
     let strings = new LocalizedStrings({
@@ -17,7 +17,7 @@ const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: str
         }
     });
 
-    const [temp, setTemp] = useState(0)
+    const [temp, setTemp] = useState<number>()
 
     const getTemp = async () => {
         if (props.channelId !== undefined && props.apiKey !== undefined){
@@ -26,20 +26,35 @@ const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: str
         }
     }
 
-
     const checkTemp = () => {
-        if (temp < 15 || temp > 18){
-            props.setIsActive(true)
+        const audio = new Audio(require('../assets/Cowbell.mp3'))
+        if (temp! < 15 || temp! > 22){
+            Store.addNotification({
+                title: `Temperature isn't normal in ${props.name} coop: ${temp}C`,
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                    duration: 5000,
+                    onScreen: true
+                }
+            })
+            audio.play()
         }
         else{
-            props.setIsActive(false)
+            audio.pause()
         }
     }
 
     useEffect(() => {
-        const interval = window.setInterval(getTemp, 2000)
-        setInterval(() => checkTemp(), 10000)
+        const interval = setInterval(getTemp, 2000)
     }, [])
+
+    useEffect(() => {
+        checkTemp()
+    }, [temp])
 
     return (
         <div className='coop-wrapper'>
@@ -56,7 +71,7 @@ const CoopElementDesc = (props: {name: string, eggsCount: number, channelId: str
                 </div>
             </div>
 
-            <div className={`coop-temp-circle ${temp > 15 && temp < 18 ? 'cooplist-coop-temp-green' : 'cooplist-coop-temp-red'}`}>
+            <div className={`coop-temp-circle ${temp! > 15 && temp! < 22 ? 'cooplist-coop-temp-green' : 'cooplist-coop-temp-red'}`}>
                 <div className='coop-temp-circle-text'>
                     {temp}&deg;C
                 </div>

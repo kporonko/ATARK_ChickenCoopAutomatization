@@ -5,10 +5,14 @@ import RegisterPage from "./pages/RegisterPage";
 import CoopsListPage from "./pages/CoopsListPage";
 import CoopDescriptionPage from "./pages/CoopDescriptionPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import {ReactNotifications} from "react-notifications-component";
+
+
 function App() {
   return (
       <BrowserRouter>
-        <Routes>
+          <ReactNotifications/>
+          <Routes>
           <Route path="/" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/my-coops" element={<CoopsListPage/>}/>
