@@ -54,7 +54,7 @@ const LoginForm = () => {
         const isCreated = await register({login: login, password: password, firstName: firstName, lastName: lastName, timeOfFirstFeeding: firstFeedingTime, timeOfSecondFeeding: secondFeedingTime} as IRegisterUser)
         if(isCreated === 201){
             alert("Account created")
-            nav('/login')
+            nav('/')
         }
         else if(isCreated === 409){
             alert("This email is already taken")
