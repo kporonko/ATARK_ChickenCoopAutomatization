@@ -1,0 +1,568 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media only screen and (max-width: 1200px){
+  .login-image{
+    display: none;
+  }
+  .main-header-login{
+    display: none;
+  }
+  .text-header-login{
+    display: none;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Login */
+.login-image{
+  width: 1100px;
+  max-height: 100%;
+  border-radius: 0 10px 10px 0 ;
+  position: relative;
+}
+.main-header-login{
+  position: absolute;
+  font-size: 90px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 900;
+  color: #ffffff;
+  width: 40%;
+  left: 4%;
+  letter-spacing: 5px;
+  top: 2%;
+}
+
+.text-header-login{
+  position: absolute;
+  font-size: 50px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  letter-spacing: 1px;
+  letter-spacing: 8px;
+  color: white;
+  width: 40%;
+  left: 4%;
+  top: 55%;
+}
+
+.login-form-h1{
+  font-size: 44px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  margin-bottom: 70px;
+}
+.login-form-inputwrapper{
+  margin-top: 20px;
+}
+
+.login-form-label{
+  font-family: "Oswald", sans-serif;
+  display: block;
+  font-size: 20px;
+}
+.login-form-input{
+  font-family: "Oswald", sans-serif;
+  font-size: large;
+  width: 100%;
+  height: 15px;
+  border-radius: 10px;
+  padding: 20px 0;
+}
+.login-form-smallBtn{
+  font-weight: bold;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: block;
+}
+.login-form-textDecNone{
+  text-decoration: none;
+  color: black;
+}
+.login-form-textDecNone:hover{
+  color: red;
+  transition: all 0.7s ease;
+}
+.login-btn-disabled{
+  background: lightgrey;
+  margin-top: 30px;
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+.login-btn-active{
+  background: #4d4c4c;
+  margin-top: 30px;
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.login-main-div{
+  display: flex;
+  height: 100%;
+}
+.login-form-button-text{
+  font-family: "Oswald", sans-serif;
+  margin: 0;
+}
+
+/* Register */
+.register-form-flex-inputs{
+  display: grid;
+  grid-template-columns: 40% 40%;
+  grid-gap: 20%;
+}
+
+/* Nav menu */
+
+.nav-wrapper{
+  display: flex;
+  margin: 5px 0px;
+  justify-content: space-around;
+}
+.nav-icon{
+  width: 70px;
+}
+.nav-link-icon{
+  width: 70px;
+}
+.nav-link-icon-2{
+  width: 70px;
+}
+.nav-link{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  gap: 15px;
+}
+
+.nav-link:hover{
+  transform: scale(1.05);
+  transition: all 0.7s ease;
+}
+
+.nav-link-text{
+  color: black;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  font-size: 34px;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.active-page{
+  text-decoration: underline;
+}
+
+/* Header section */
+
+.header-section-wrapper{
+  background-color: black;
+  border-radius: 10px;
+  padding: 5px 0;
+}
+.header-section-text{
+  text-align: center;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  margin: 0;
+}
+
+
+/* Add coop button */
+.button-add-coop-wrapper{
+  margin: 20px 0;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.button-add-coop{
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #43FF00;
+  border-radius: 30px;
+  padding: 0px 20px;
+}
+.button-add-coop:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.7s ease;
+}
+
+.button-add-icon{
+  width: 50px;
+}
+
+/* Modal add coop */
+
+.modal-add-coop-wrap{
+  opacity: 1;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  z-index: 1;
+}
+
+.modal-add-coop-wrap-hidden{
+  opacity: 0;
+  pointer-events: none;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+}
+
+.modal-add-coop{
+  width: 700px;
+  height: 600px;
+  background: white;
+  border-radius: 30px;
+}
+
+.form-modal-add-coop{
+  margin: 30px 80px;
+}
+.modal-add-coop-form-label{
+  font-size: 30px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+}
+.modal-add-coop-form-input{
+  height: 40px;
+  width: 99%;
+  font-size: 22px;
+  border-radius: 10px;
+}
+
+/* Coop */
+.coops-wrapper{
+  margin: 2% 20%;
+}
+.coop-wrapper{
+  position: relative;
+  margin: 80px 0;
+  background: #4d4c4c;
+  border-radius: 200px;
+  padding: 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.coop-wrapper:hover{
+  transform: scale(1.05);
+  background: #d2cfcf;
+  transition: all 0.7s ease;
+}
+
+.coop-wrapper:hover .coop-info-name{
+  color: black;
+  transition: all 0.7s ease;
+}
+
+.coop-wrapper:hover .coop-info-eggs{
+  color: black;
+  transition: all 0.7s ease;
+}
+
+.coop-icon{
+  width: 150px;
+}
+
+.coop-icon-wrapper{
+  margin-left: 15%;
+}
+.coop-info{
+  margin-right: 15%;
+}
+.coop-info-name{
+  font-family: "Oswald", sans-serif;
+  font-size: 44px;
+  color: white;
+  text-align: right;
+  margin: 0 0 10px 0;
+}
+.coop-info-eggs{
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  font-weight: 100;
+  color: white;
+  text-align: right;
+  margin: 0;
+}
+
+.coop-temp-circle{
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  transform:translate(50%,-50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+
+  /* to fix*/
+  background: #4da6ff;
+  /*       */
+
+  mix-blend-mode:darken;
+}
+
+.cooplist-coop-temp-red{
+  background: red;
+}
+.cooplist-coop-temp-green{
+  background: #43FF00;
+}
+.coop-temp-circle-text{
+  position: absolute;
+  top: 32%;
+  right: 14%;
+
+  font-size: 38px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  color: white;
+}
+
+/* Coop Description */
+
+.coop-desc-wrapper{
+  background: #bebebe;
+  display: flex;
+  justify-content: space-evenly;
+}
+.coop-desc-img-wrapper{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.coop-desc-img{
+  width: 500px;
+  border-radius: 50px;
+}
+.coop-desc-info-wrapper{
+  min-width: 300px;
+  padding: 0px 120px;
+  margin-top: 30px;
+  background: white;
+  border-radius: 50px;
+  margin-bottom: 30px;
+  position: relative;
+}
+.button-delete-wrapper{
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  border: none;
+}
+.button-delete{
+  background-color: white; /* Blue background */
+  border: none; /* Remove borders */
+  font-size: 36px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+.button-delete:hover{
+  transform: scale(1.2);
+  transition: 0.5s ease;
+}
+.coop-desc-info-name{
+  text-align: center;
+  font-weight: 900;
+  font-family: "Oswald", sans-serif;
+  font-size: 44px;
+  margin: 0;
+}
+.coop-desc-info-eggs{
+  text-align: center;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin: 0 0 0px 0;
+  color: white;
+}
+.coop-desc-info-eggs-text{
+  text-align: center;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin: 30px 0 20px 0px;
+}
+.coop-desc-info-temp{
+  text-align: center;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin: 0px 0 0px 0px;
+  color: white;
+}
+.coop-desc-info-temp-text{
+  text-align: center;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin: 30px 0 20px 0px;
+}
+
+.coop-desc-info-eggs-circle{
+  width: fit-content;
+  background: black;
+  border-radius: 100%;
+  padding: 30px 40px;
+  margin: auto;
+}
+.coop-desc-info-temp-oval{
+  width: fit-content;
+  border-radius: 30px;
+  padding: 10px 70px;
+  margin: auto auto 20px;
+}
+
+/* Coop feedings and egg-collects sections */
+.coop-profile-feedings-wrapper{
+  margin: 2% 20%;
+}
+.feeding{
+  background: #bebebe;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 100px;
+  border: 5px solid black;
+}
+.feeding:hover{
+  transform: scale(1.05);
+  color: white;
+  background: black;
+  transition: all 1s ease;
+}
+.feeding-icon{
+  width: 150px;
+}
+
+.feeding-date{
+  text-align: right;
+  font-size: 44px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+.feeding-time{
+  margin-top: 10px;
+  text-align: right;
+  font-size: 28px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}
+
+.egg-collect-count-and-icon-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.egg-collect-count{
+  font-size: 48px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}
+
+.coop-option-text{
+  margin-top: 20px;
+  font-weight: 100;
+  font-size: 34px;
+}
+.coop-option-text:hover{
+  cursor: pointer;
+  color: #43FF00;
+  transition: all 0.5s ease;
+}
+.coop-option-active{
+  color: #2ea803;
+}
+
+.fa-trash{
+  color: red;
+}
+
+/* Loader */
+
+.loader-wrap{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10% 30%;
+}
+.loader-gif{
+  width: 150px;
+}
+.loader-text{
+  font-size: 68px;
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}
+
+/* Temperature */
+
+.temp-red{
+  background: red;
+}
+.temp-green{
+  background: #43FF00;
+}
+
+/* Timer */
+
+.timer-feeding-wrapper{
+  display: flex;
+  justify-content: center;
+}
+.timer-feeding{
+ text-align: center;
+  font-size: 48px;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+}
+.timer-feeding-text{
+  text-align: center;
+  font-size: 28px;
+  font-weight: 100;
+  font-family: "Oswald", sans-serif;
+}
